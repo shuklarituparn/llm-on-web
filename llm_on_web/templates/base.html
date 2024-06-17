@@ -71,7 +71,7 @@
                  id="user-dropdown">
               <div class="px-4 py-3">
                 {% if request.user.is_authenticated %}
-                  <span class="block text-sm text-gray-900 dark:text-white">{{ request.user.username }}</span>
+                  <span class="block text-sm text-gray-900 dark:text-white">{{ request.user.name }}</span>
                   <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">{{ request.user.email }}</span>
                 {% else %}
                   <span class="block text-sm text-gray-900 dark:text-white text-center">Hello, please sign in!</span>
