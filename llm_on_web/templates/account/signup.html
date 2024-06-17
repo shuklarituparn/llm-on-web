@@ -3,41 +3,68 @@
 {% load static %}
 
 {% block title %}
-  Signup
+  Register
 {% endblock title %}
 {% block bodyclass %}
   bg-[url({% static 'images/bg/bg2.jpg' %})]	 bg-cover   bg-opacity-20 bg-no-repeat min-h-screen
 {% endblock bodyclass %}
 {% block content %}
-  {% block javascript %}
-    {{ block.super }}
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        gsap.to("#mainText", {
-          duration: 1,
-          text: "Try LLMs locally!",
-          delay: 1
-        });
-        console.log("Animation triggered!");
-      });
-    </script>
-  {% endblock javascript %}
-  <div class="flex flex-row justify-center mt-40">
-    <div>
-      <img src="{% static 'images/gemini-icon.png' %}"
-           alt="Gemma"
-           width="300"
-           height="300" />
+  <div class="flex h-screen w-screen items-center justify-center">
+    <div class="rounded-3xl bg-gray-800 bg-opacity-40  py-2 px-14 sm:px-48 shadow-2xl backdrop-blur-md">
+      <div class="text-white font-mono">
+        <div class=" sm:mb-8 flex flex-col items-center">
+          <img class="mt-4"
+               src="{% static 'images/gemma.svg' %}"
+               width="140"
+               height="140"
+               alt="login logo" />
+          <p class="mt-4 mb-8 text-xl sm:text-3xl ">Register</p>
+          <form action="{% url 'account_signup' %}">
+            <div>
+              <label for="email"
+                     class="block mb-2 text-sm font-mono  text-white dark:text-white">Email</label>
+              <input type="email"
+                     id="email"
+                     class="opacity-70 backdrop-blur-md bg-white border border-white text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                     placeholder="name@example.com"
+                     required />
+            </div>
+            <div class="mb-5">
+              <label for="password"
+                     class="block mb-2 mt-4 text-sm font-mono text-white dark:text-white">Password</label>
+              <input type="password"
+                     id="password"
+                     class="opacity-70 backdrop-blur-md bg-white  border border-white text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                     required />
+            </div>
+            <div class="mb-5">
+              <label for="repeat-password"
+                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Repeat password</label>
+              <input type="password"
+                     id="repeat-password"
+                     class="opacity-70 backdrop-blur-md bg-white border border-white text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                     required />
+            </div>
+            <div class="flex items-start mb-5">
+              <div class="flex items-center h-5">
+                <input id="terms"
+                       type="checkbox"
+                       value=""
+                       class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
+                       required />
+              </div>
+              <label for="terms"
+                     class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                I agree with the <a href="#" class="text-blue-600 hover:underline dark:text-blue-500">terms and conditions</a>
+              </label>
+            </div>
+            <button type="submit"
+                    class="sm:mx-20 mb-4 text-white rounded-xl px-10 backdrop-blur-md bg-grey-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium  text-sm w-full sm:w-auto  py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
-    <div class="hidden sm:block">
-      <img src="{% static 'images/gemini-icon.png' %}"
-           alt="Gemma"
-           width="200"
-           height="200" />
-    </div>
-  </div>
-  <div class="flex justify-center ml-10 mt-20 ">
-    <h1 id="mainText"
-        class="lg:text-8xl text-3xl text-center text-white font-mono">Welcome to Gemma!</h1>
   </div>
 {% endblock content %}
