@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load allauth account %}
+
+{% block title %}
+  Logout
+{% endblock title %}
+{% block bodyclass %}
+  bg-gemma	 bg-cover   bg-opacity-20 bg-no-repeat min-h-screen
+{% endblock bodyclass %}
+{% block content %}
+  <div class="flex h-screen w-screen items-center justify-center">
+    <div class="rounded-3xl bg-gray-800 bg-opacity-40 py-2 px-14 sm:px-48 shadow-2xl backdrop-blur-md mt-10">
+      <div class="text-white font-mono">
+        <div class=" sm:mb-8 flex flex-col items-center">
+          <img class="mt-4"
+               src="{% static 'images/gemma.svg' %}"
+               width="140"
+               height="140"
+               alt="login logo" />
+          <p class="mt-4 mb-8 text-xl sm:text-5xl ">Logout</p>
+          <p class="mt-4 mb-4 text-md sm:text-3xl">Are you sure you want to logout?</p>
+        </div>
+        <div class="py-10 space-x-20">
+          <form action="{% url 'account_logout' %}" method="post">
+            <a href="{% url 'home' %}"
+               class="sm:mx-20 mb-4 text-white rounded-xl px-10 bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium  text-sm w-full sm:w-auto  py-2.5 text-center">
+              No
+            </a>
+            {% csrf_token %}
+            <button type="submit"
+                    class="sm:mx-20 mb-4 text-white rounded-xl px-10 bg-red-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium  text-sm w-full sm:w-auto  py-2.5 text-center">
+              Yes
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

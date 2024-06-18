@@ -1,4 +1,5 @@
 {% load static i18n %}
+{% load static %}
 
 <!DOCTYPE html>
 {% get_current_language as LANGUAGE_CODE %}
@@ -17,9 +18,10 @@
     <link rel="icon" href="{% static 'images/favicons/gemini-icon.png' %}" />
     {% block css %}
       <!-- Latest compiled and minified Bootstrap CSS -->
-      <script src="https://cdn.tailwindcss.com"></script>
-      <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"
-            rel="stylesheet" />
+      {#      <script src="https://cdn.tailwindcss.com"></script>#}
+      {#      <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"#}
+      {#            rel="stylesheet" />#}
+      <link href="{% static 'css/output.css' %}" rel="stylesheet" />
     {% endblock css %}
     <!-- Le javascript
     ================================================== -->
@@ -46,18 +48,18 @@
   </head>
   <body class="{% block bodyclass %}{% endblock bodyclass %}  ">
     {% block body %}
-      <nav class="bg-gray-800 sm:rounded-b-[2.5rem] border-gray-200 fixed top-1 w-full rounded-xl font-mono dark:bg-gray-900 ">
+      <nav class=" bg-gray-800 rounded-full  sm:rounded-b-[2.5rem] fixed top-1 w-full rounded-xl font-mono ">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <a href="{% url 'home' %}"
              class="flex items-center space-x-3 rtl:space-x-reverse">
             <img src="{% static 'images/favicons/gemini-icon.png' %}"
                  class="h-8"
                  alt="Gemma" />
-            <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Gemma</span>
+            <span class="self-center text-2xl font-semibold whitespace-nowrap text-white">Gemma</span>
           </a>
           <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
             <button type="button"
-                    class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                    class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300"
                     id="user-menu-button"
                     aria-expanded="false"
                     data-dropdown-toggle="user-dropdown"
@@ -67,42 +69,42 @@
                    src="{% static 'images/1.jpg' %}"
                    alt="user photo" />
             </button>
-            <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
+            <div class="z-50 hidden my-4 text-base list-none  divide-y divide-gray-100 rounded-lg shadow bg-gray-700 "
                  id="user-dropdown">
               <div class="px-4 py-3">
                 {% if request.user.is_authenticated %}
-                  <span class="block text-sm text-gray-900 dark:text-white">{{ request.user.name }}</span>
-                  <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">{{ request.user.email }}</span>
+                  <span class="block text-sm text-white">{{ request.user.name }}</span>
+                  <span class="block text-sm  truncate text-gray-100">{{ request.user.email }}</span>
                 {% else %}
-                  <span class="block text-sm text-gray-900 dark:text-white text-center">Hello, please sign in!</span>
+                  <span class="block text-sm text-white text-center">Hello, please sign in!</span>
                 {% endif %}
               </div>
               <ul class="py-2" aria-labelledby="user-menu-button">
                 {% if request.user.is_authenticated %}
                   <li>
                     <a href="{% url 'users:detail' request.user.pk %}"
-                       class="block px-4 py-2 text-sm text-center text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">{% translate "My Profile" %}</a>
+                       class="block px-4 py-2 text-sm text-center text-gray-700  hover:bg-gray-600 dark:text-gray-200 text-white">{% translate "My Profile" %}</a>
                   </li>
                   <li>
                     <a href="{% url 'users:conversations' request.user.pk %}"
-                       class="block px-4 py-2 text-center text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Conversations</a>
+                       class="block px-4 py-2 text-center text-sm text-gray-700 hover:bg-gray-600 text-white">Conversations</a>
                   </li>
                   <li>
                     <a href="{% url 'account_logout' %}"
-                       class="block px-4 py-2 text-center text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">{% translate "Sign Out" %}</a>
+                       class="block px-4 py-2 text-center text-sm text-gray-700 hover:bg-gray-600  text-white">{% translate "Sign Out" %}</a>
                   </li>
                 {% else %}
                   {% if ACCOUNT_ALLOW_REGISTRATION %}
                     <li>
                       <a id="sign-up-link"
                          href="{% url 'account_signup' %}"
-                         class="block px-4 py-2 text-center text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">{% translate "Sign Up" %}</a>
+                         class="block px-4 py-2 text-center text-sm text-gray-700 hover:bg-gray-600 dark:text-gray-200 text-white">{% translate "Sign Up" %}</a>
                     </li>
                   {% endif %}
                   <li>
                     <a id="log-in-link"
                        href="{% url 'account_login' %}"
-                       class="block px-4 py-2 text-center text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">{% translate "Sign In" %}</a>
+                       class="block px-4 py-2 text-center text-sm text-gray-700 hover:bg-gray-600 dark:text-gray-200 text-white">{% translate "Sign In" %}</a>
                   </li>
                 {% endif %}
               </ul>
@@ -123,24 +125,24 @@
             </button>
           </div>
           <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
-               id="navbar-user">
-            <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+               id="navbar-site">
+            <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border  rounded-lg  md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
               <li>
                 <a href="{% url 'home' %}"
-                   class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
+                   class="block py-2 px-3 text-white bg-gray-100 rounded md:bg-transparent md:p-0 md:hover:text-blue-700"
                    aria-current="page">Home</a>
               </li>
               <li>
                 <a href="{% url 'about' %}"
-                   class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
+                   class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent border-gray-700">About</a>
               </li>
               <li>
                 <a href="{% url 'chat' %}"
-                   class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Chat</a>
+                   class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent border-gray-700">Chat</a>
               </li>
               <li>
                 <a href="{% url 'contact' %}"
-                   class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
+                   class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent border-gray-700">Contact</a>
               </li>
             </ul>
           </div>
