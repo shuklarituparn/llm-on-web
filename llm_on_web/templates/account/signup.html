@@ -6,7 +6,7 @@
   Register
 {% endblock title %}
 {% block bodyclass %}
-  bg-[url({% static 'images/bg/bg2.jpg' %})]	 bg-cover   bg-opacity-20 bg-no-repeat min-h-screen
+  bg-gemma	 bg-cover   bg-opacity-20 bg-no-repeat min-h-screen
 {% endblock bodyclass %}
 {% block content %}
   <div class="flex h-screen w-screen items-center justify-center">
@@ -19,30 +19,32 @@
                height="140"
                alt="login logo" />
           <p class="mt-4 mb-8 text-xl sm:text-3xl ">Register</p>
-          <form action="{% url 'account_signup' %}">
+          <form action="{% url 'account_signup' %}" method="post">
+            {% csrf_token %}
             <div>
-              <label for="email"
-                     class="block mb-2 text-sm font-mono  text-white dark:text-white">Email</label>
+              <label for="email" class="block mb-2 text-sm font-mono  text-white">Email</label>
               <input type="email"
                      id="email"
-                     class="opacity-70 backdrop-blur-md bg-white border border-white text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                     name="email"
+                     class="opacity-70 backdrop-blur-md bg-white border border-white text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  "
                      placeholder="name@example.com"
                      required />
             </div>
             <div class="mb-5">
-              <label for="password"
-                     class="block mb-2 mt-4 text-sm font-mono text-white dark:text-white">Password</label>
+              <label for="password" class="block mb-2 mt-4 text-sm font-mono text-white ">Password</label>
               <input type="password"
-                     id="password"
-                     class="opacity-70 backdrop-blur-md bg-white  border border-white text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                     id="password1"
+                     name="password1"
+                     class="opacity-70 backdrop-blur-md bg-white  border border-white text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-700 "
                      required />
             </div>
             <div class="mb-5">
               <label for="repeat-password"
-                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Repeat password</label>
+                     class="block mb-2 text-sm font-medium text-white">Repeat password</label>
               <input type="password"
-                     id="repeat-password"
-                     class="opacity-70 backdrop-blur-md bg-white border border-white text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                     id="password2"
+                     name="password2"
+                     class="opacity-70 backdrop-blur-md bg-white border border-white text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                      required />
             </div>
             <div class="flex items-start mb-5">
@@ -50,16 +52,15 @@
                 <input id="terms"
                        type="checkbox"
                        value=""
-                       class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
+                       class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300"
                        required />
               </div>
-              <label for="terms"
-                     class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                I agree with the <a href="#" class="text-blue-600 hover:underline dark:text-blue-500">terms and conditions</a>
+              <label for="terms" class="ms-2 text-sm font-medium text-white">
+                I agree with the <a href="#" class="text-blue-300 hover:underline  ">terms and conditions</a>
               </label>
             </div>
             <button type="submit"
-                    class="sm:mx-20 mb-4 text-white rounded-xl px-10 backdrop-blur-md bg-grey-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium  text-sm w-full sm:w-auto  py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    class="sm:mx-20 mb-4 text-white rounded-xl px-10 backdrop-blur-md bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium  text-sm w-full sm:w-auto  py-2.5 text-center">
               Submit
             </button>
           </form>
