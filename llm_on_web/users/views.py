@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import DetailView
 from django.views.generic import RedirectView
+from django.views.generic import TemplateView
 from django.views.generic import UpdateView
 
 from llm_on_web.users.models import User
@@ -43,3 +44,10 @@ class UserRedirectView(LoginRequiredMixin, RedirectView):
 
 
 user_redirect_view = UserRedirectView.as_view()
+
+
+class UserConversationsView(LoginRequiredMixin, TemplateView):
+    template_name = "users/conversations.html"
+
+
+user_conversations_view = UserConversationsView.as_view()
