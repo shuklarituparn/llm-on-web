@@ -11,7 +11,7 @@
 {% block content %}
   <div class="flex h-screen w-screen items-center justify-center">
     <div class="rounded-3xl bg-gray-800 bg-opacity-40  py-2 px-14 sm:px-48 shadow-2xl backdrop-blur-md">
-      <div class="text-white font-mono">
+      <div class="text-white font-sans1">
         <div class=" sm:mb-8 flex flex-col items-center">
           <img class="mt-4"
                src="{% static 'images/gemma.svg' %}"
@@ -22,7 +22,7 @@
           <form action="{% url 'account_signup' %}" method="post">
             {% csrf_token %}
             <div>
-              <label for="email" class="block mb-2 text-sm font-mono  text-white">Email</label>
+              <label for="email" class="block mb-2 text-sm font-sans1  text-white">Email</label>
               <input type="email"
                      id="email"
                      name="email"
@@ -31,7 +31,7 @@
                      required />
             </div>
             <div class="mb-5">
-              <label for="password" class="block mb-2 mt-4 text-sm font-mono text-white ">Password</label>
+              <label for="password" class="block mb-2 mt-4 text-sm font-sans1 text-white ">Password</label>
               <input type="password"
                      id="password1"
                      name="password1"

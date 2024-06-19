@@ -77,7 +77,7 @@ celerybeat-schedule
 # Environments
 .venv
 venv/
-ENV/
+env/
 
 # Rope project settings
 .ropeproject
@@ -341,6 +341,6 @@ llm_on_web/media/
 
 .pytest_cache/
 .ipython/
-.env
+env
 .envs/*
 !.envs/.local/

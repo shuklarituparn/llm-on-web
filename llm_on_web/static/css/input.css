@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer base {
+  @font-face {
+     font-family: sans1;
+     src: local('sans1'), url("../fonts/sans1.ttf") format("truetype");
+
+  }
+  @font-face {
+    font-family: cassa;
+      src: local('cassa'), url("../fonts/cassa.otf") format("opentype");
+  }
+
+}
