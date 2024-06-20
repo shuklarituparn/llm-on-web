@@ -57,7 +57,7 @@
                  alt="Gemma" />
             <span class="self-center text-2xl font-semibold whitespace-nowrap text-white">Gemma</span>
           </a>
-          <div class="flex relative  items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+          <div class="flex items-center  mx-4 md:order-2 space-x-3 md:space-x-0 space-x-reverse">
             <button type="button"
                     class="flex text-sm bg-gray-800 rounded-full  focus:ring-4 focus:ring-gray-300"
                     id="user-menu-button"
@@ -69,7 +69,7 @@
                    src="{% if request.user.userpicture %}{{ requeset.user.userpicture }}{% else %}{% static 'images/user2.svg' %}{% endif %}"
                    alt="User Picture" />
             </button>
-            <div class=" hidden my-4 text-base list-none  divide-y divide-gray-100 rounded-lg shadow bg-gray-700 "
+            <div class=" hidden my-4 rounded-xl font-sans1 divide-y divide-gray-100 rounded-lg shadow-xl bg-gray-900 backdrop-blur-xl bg-opacity-60"
                  id="user-dropdown">
               <div class="px-4 py-3">
                 {% if request.user.is_authenticated %}
@@ -92,6 +92,14 @@
                   <li>
                     <a href="{% url 'users:conversations' request.user.pk %}"
                        class="block px-4 py-2 text-center text-sm text-gray-700 hover:bg-gray-600 text-white">Conversations</a>
+                  </li>
+                  <li class="md:hidden">
+                    <a href="{% url 'contact' %}"
+                       class="block px-4 py-2 text-sm text-center text-gray-700  hover:bg-gray-600 dark:text-gray-200 text-white">Chat</a>
+                  </li>
+                  <li class="md:hidden">
+                    <a href="{% url 'about' %}"
+                       class="block px-4 py-2 text-sm text-center text-gray-700  hover:bg-gray-600 dark:text-gray-200 text-white">Chat</a>
                   </li>
                   <li>
                     <a href="{% url 'account_logout' %}"
