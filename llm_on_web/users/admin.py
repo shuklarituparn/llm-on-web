@@ -16,7 +16,6 @@ if settings.DJANGO_ADMIN_FORCE_ALLAUTH:
 
 
 @admin.register(User)
-@admin.register(User)
 class UserAdmin(auth_admin.UserAdmin):
     form = UserAdminChangeForm
     add_form = UserAdminCreationForm
