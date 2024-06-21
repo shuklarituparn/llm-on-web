@@ -17,10 +17,6 @@
     <meta name="author" content="Rituparn Shukla" />
     <link rel="icon" href="{% static 'images/favicons/gemini-icon.png' %}" />
     {% block css %}
-      <!-- Latest compiled and minified Bootstrap CSS -->
-      {#      <script src="https://cdn.tailwindcss.com"></script>#}
-      {#            <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"#}
-      {#            rel="stylesheet" />#}
       <link href="{% static 'css/output.css' %}" rel="stylesheet" />
     {% endblock css %}
     <!-- Le javascript
@@ -95,11 +91,11 @@
                   </li>
                   <li class="md:hidden">
                     <a href="{% url 'contact' %}"
-                       class="block px-4 py-2 text-sm text-center text-gray-700  hover:bg-gray-600 dark:text-gray-200 text-white">Chat</a>
+                       class="block px-4 py-2 text-sm text-center text-gray-700  hover:bg-gray-600 dark:text-gray-200 text-white">Contact</a>
                   </li>
                   <li class="md:hidden">
                     <a href="{% url 'about' %}"
-                       class="block px-4 py-2 text-sm text-center text-gray-700  hover:bg-gray-600 dark:text-gray-200 text-white">Chat</a>
+                       class="block px-4 py-2 text-sm text-center text-gray-700  hover:bg-gray-600 dark:text-gray-200 text-white">About</a>
                   </li>
                   <li>
                     <a href="{% url 'account_logout' %}"

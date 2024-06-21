@@ -8,8 +8,28 @@
 {% block bodyclass %}
   bg-gemma bg-cover bg-no-repeat min-h-screen
 {% endblock bodyclass %}
+{% block javascript %}
+  {{ block.super }}
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/"
+      }
+    }
+  </script>
+{% endblock javascript %}
 {% block content %}
-  <div>
-    <img src="{% static 'images/llama.png' %}" alt="llama" />
+  <div class="flex flex-col items-center justify-center">
+    <canvas class="flex flex-col h-[100px] w-[300px] items-center justify-center">
+      <script type="module" src="{% static 'js/project.js/' %}"></script>
+    </canvas>
+    <p class="flex mt-4 mb-8 text-xl text-bold text-white text-center sm:text-6xl font-cassa">
+      We give jobs to real llamas
+    </p>
+    <p class="flex mt-4 mb-8 text-xl text-bold text-white text-center sm:text-6xl font-cassa">
+      and use the LLM models that they make
+    </p>
+    {#  <p class="flex mt-4<p class="flex mt-4 mb-8 text-6xl text-bold text-white sm:text-6xl font-cassa">and use the LLM models that they make</p> mb-8 text-6xl text-bold text-white sm:text-6xl font-cassa">and use the LLM models that they make</p>#}
   </div>
 {% endblock content %}
