@@ -3,43 +3,42 @@
 {% load static %}
 
 {% block title %}
-  Home
+  Contact
 {% endblock title %}
 {% block bodyclass %}
   bg-gemma bg-cover bg-no-repeat min-h-screen
 {% endblock bodyclass %}
 {% block content %}
-  {% block javascript %}
-    {{ block.super }}
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        gsap.to("#mainText", {
-          duration: 1.5,
-          text: "Try LLMs locally!",
-          delay: 1
-        });
-        console.log("Animation triggered!");
-      });
-    </script>
-  {% endblock javascript %}
-  <div class="flex flex-row justify-center mt-40">
-    <div>
-      <img class="drop-shadow-2xl"
-           src="{% static 'images/gemini-icon.png' %}"
-           alt="Gemma"
-           width="300"
-           height="300" />
+  <div class="flex h-screen w-screen items-center justify-center">
+    <div class="rounded-3xl bg-gray-800 bg-opacity-40 py-2 px-4 md:px-24 lg:px-48 shadow-2xl backdrop-blur-md mt-10">
+      <div class="text-white font-sans1">
+        <div class="mb-2 sm:mb-8 flex flex-col items-center">
+          <img class="mt-4"
+               src="{% static 'images/gemini-icon.png' %}"
+               width="140"
+               height="140"
+               alt="login logo" />
+          <p class="mt-4 mb-8 text-3xl sm:text-6xl ">Contact Us</p>
+          <form class="flex flex-col mt-4 space-y-8 md:space-y-12 lg:space-y-16 items-center justify-center ">
+            <div class="flex flex-row ">
+              <input class="rounded-full px-20 py-2 bg-gray-800 bg-opacity-20 backdrop-blur-xl text-white font-sans1 text-center"
+                     placeholder="Your Email" />
+            </div>
+            <div class="flex flex-row">
+              <input class="rounded-full px-20 py-2 bg-gray-800 bg-opacity-20 backdrop-blur-xl text-white font-sans1 text-center"
+                     placeholder="Subject" />
+            </div>
+            <div class="flex flex-row">
+              <textarea class="rounded-full  py-2 bg-gray-800 bg-opacity-20 h-[50px] w-[370px] md:h-[50px] md:w-[400px] backdrop-blur-xl text-white font-sans1 text-center"
+                        placeholder="Enter your problem here"></textarea>
+            </div>
+            <button type="submit"
+                    class="sm:mx-20 mb-8 text-white rounded-full px-10 backdrop-blur-md bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium  text-sm w-full sm:w-auto  py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800">
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
-    <div class="hidden sm:block ">
-      <img class="drop-shadow-lg"
-           src="{% static 'images/gemini-icon.png' %}"
-           alt="Gemma"
-           width="200"
-           height="200" />
-    </div>
-  </div>
-  <div class="flex justify-center ml-10 mt-20 ">
-    <h1 id="mainText"
-        class="lg:text-8xl  text-3xl text-center text-white font-sans1">Welcome to Gemma!</h1>
   </div>
 {% endblock content %}
