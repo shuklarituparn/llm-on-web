@@ -66,15 +66,15 @@
                     data-dropdown-placement="bottom">
               <span class="sr-only">Open user menu</span>
               <img class="w-8 h-8 rounded-full"
-                   src="{% if request.user.userpicture %}{{ requeset.user.userpicture }}{% else %}{% static 'images/user2.svg' %}{% endif %}"
+                   src="{% if request.user.userpicture %}/media/{{ request.user.userpicture }}{% else %}{% static 'images/user2.svg' %}{% endif %}"
                    alt="User Picture" />
             </button>
             <div class=" hidden my-4 rounded-xl font-sans1 divide-y divide-gray-100 rounded-lg shadow-xl bg-gray-900 backdrop-blur-xl bg-opacity-60"
                  id="user-dropdown">
               <div class="px-4 py-3">
                 {% if request.user.is_authenticated %}
-                  <span class="block text-sm text{% translate "Chat" %}-white">{{ request.user.name }}</span>
-                  <span class="block text-sm  truncate text-gray-100">{{ request.user.email }}</span>
+                  <span class="block text-sm text-white">{{ request.user.name }}</span>
+                  <span class="block text-sm text-gray-100">{{ request.user.email }}</span>
                 {% else %}
                   <span class="block text-sm text-white text-center">Hello, please sign in!</span>
                 {% endif %}

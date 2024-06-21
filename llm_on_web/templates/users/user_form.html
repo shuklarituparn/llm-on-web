@@ -1,28 +1,7 @@
-{#{% extends "base.html" %}#}
-{##}
-{#{% load crispy_forms_tags %}#}
-{##}
-{#{% block title %}#}
-{#  {{ user.name }}#}
-{#{% endblock title %}#}
-{#{% block content %}#}
-{#  <h1>{{ user.name }}</h1>#}
-{#  <form class="form-horizontal"#}
-{#        method="post"#}
-{#        action="{% url 'users:update' %}">#}
-{#    {% csrf_token %}#}
-{#    {{ form|crispy }}#}
-{#    <div class="control-group">#}
-{#      <div class="controls">#}
-{#        <button type="submit" class="btn btn-primary">Update</button>#}
-{#      </div>#}
-{#    </div>#}
-{#  </form>#}
-{#{% endblock content %}#}
 {% extends "base.html" %}
 
 {% load static %}
-{% load allauth account %}
+{% load allauth %}
 
 {% block title %}
   Edit Profile
@@ -32,93 +11,77 @@
 {% endblock bodyclass %}
 {% block content %}
   <div class="hidden lg:flex h-screen w-screen justify-center items-center font-sans1">
-    <div class="rounded-3xl bg-gray-800 bg-opacity-40 px-10 mt-20 shadow-2xl backdrop-blur-md">
-      <div class="mx-auto w-36 h-36 mb-8">
+    <div class="rounded-3xl bg-gray-800 bg-opacity-40 px-20 py-4 mt-20 shadow-2xl backdrop-blur-md">
+      <div class="mx-auto w-40  h-40 mb-8 mt-8">
         <img class="bg-cover bg-center w-full h-full rounded-full drop-shadow-2xl"
-             src="{% if object.userpicture %}{{ object.userpicture }}{% else %}{% static 'images/user1.svg' %}{% endif %}"
+             src="{% if object.userpicture %}/media/{{ object.userpicture }}{% else %}{% static 'images/user1.svg' %}{% endif %}"
              alt="User Picture" />
       </div>
       <div class=" left-26 ">
-        <h1 class="font-sans1 text-center text-white text-4xl ">Profile</h1>
+        <h1 class="font-sans1 text-center text-white text-4xl ">Edit Profile</h1>
       </div>
-      <div class="flex flex-row py-4 items-center justify-center">
-        <div class="flex flex-col space-y-14">
-          <div class="flex flex-row space-x-14 items-center justify-center">
-            <p class="text-center text-xl text-white VK-Sans">Name</p>
-            <svg xmlns="http://www.w3.org/2000/svg"
-                 width="94"
-                 height="32"
-                 viewBox="0 0 94 32"
-                 fill="none">
-              <path d="M77 1L93 16L77 31" stroke="white" />
-              <path d="M93 16L0 16" stroke="white" />
-            </svg>
-          </div>
-          <div class="flex flex-row space-x-14 items-center justify-center">
-            <p class="text-center text-xl text-white VK-Sans">Email</p>
-            <svg xmlns="http://www.w3.org/2000/svg"
-                 width="94"
-                 height="32"
-                 viewBox="0 0 94 32"
-                 fill="none">
-              <path d="M77 1L93 16L77 31" stroke="white" />
-              <path d="M93 16L0 16" stroke="white" />
-            </svg>
-          </div>
-          <div class="flex flex-row space-x-14 items-center justify-center">
-            <p class="text-center text-xl text-white VK-Sans">Photo</p>
-            <svg xmlns="http://www.w3.org/2000/svg"
-                 width="94"
-                 height="32"
-                 viewBox="0 0 94 32"
-                 fill="none">
-              <path d="M77 1L93 16L77 31" stroke="white" />
-              <path d="M93 16L0 16" stroke="white" />
-            </svg>
-          </div>
-        </div>
-        <form class="flex flex-col ml-8 mt-14 space-y-10">
+      <div class="flex flex-row">
+        <form action="{% url 'users:update' %}"
+              method="post"
+              class="flex flex-col space-y-12"
+              enctype="multipart/form-data">
+          {% csrf_token %}
           <input type="text"
-                 class=" mt-1 mb-1  text-white bg-gray-800 bg-opacity-20  border border-gray-200 rounded-full text-md px-10 py-2 text-center  items-center" />
-        </input />
+                 id="name"
+                 name="name"
+                 class="  text-white bg-gray-800 bg-opacity-20  border border-gray-200 rounded-full text-md px-16 py-2 text-center  items-center"
+                 placeholder=" {% if object.name %} {{ object.name }} {% else %} Name {% endif %}" />
+          <input type="email"
+                 id="email"
+                 name="email"
+                 class="   text-white bg-gray-800 bg-opacity-20   border border-gray-200  rounded-full text-md px-10 py-2 text-center items-center"
+                 placeholder="{{ object.email }}" />
+          <input type="file"
+                 id="userpicture"
+                 name="userpicture"
+                 class=" appearance-none  text-white bg-gray-800 bg-opacity-20   border border-gray-200  rounded-full text-md px-10 py-2 text-center items-center"
+                 placeholder="Photo" />
+          <button type="submit"
+                  class="sm:mx-20 mb-8 text-white rounded-full px-10 backdrop-blur-md bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium  text-sm w-full sm:w-auto  py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800">
+            Update
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="lg:hidden flex h-screen w-screen flex-col justify-center items-center">
+    <div class="rounded-3xl bg-gray-800 bg-opacity-40 px-20 py-10 shadow-2xl backdrop-blur-md">
+      <div class="relative">
+        <img class="bg-cover bg-center w-36 h-36 md:w-48 md:h-48 rounded-full mx-auto mb-4"
+             src=" {% if object.userpicture %}{{ object.userpicture }}{% else %}{% static 'images/user1.svg' %}{% endif %}"
+             alt="user-picture" />
+        <h1 class="text-center mt-4 text-sm text-white text-xl md:text-3xl mb-4">Edit Profile</h1>
+      </div>
+      <form action="{% url 'users:update' %}"
+            method="post"
+            class="flex flex-col space-y-4">
+        {% csrf_token %}
+        <input type="text"
+               id="name"
+               name="name"
+               class="text-white bg-gray-800 bg-opacity-20 border border-gray-200 rounded-full text-md px-6 py-2 text-center"
+               placeholder="Name" />
         <input type="email"
-               class="mt-1 mb-1   text-white bg-gray-800 bg-opacity-20   border border-gray-200  rounded-full text-md px-10 py-2 text-center items-center" />
-      </input />
-      <input type="file"
-             class="mt-1 mb-1   text-white bg-gray-800 bg-opacity-20   border border-gray-200  rounded-full text-md px-10 py-2 text-center items-center" />
-      <button type="submit"
-              class="sm:mx-20 mb-4 text-white rounded-xl px-10 backdrop-blur-md bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium  text-sm w-full sm:w-auto  py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800">
-        Submit
-      </button>
-    </form>
-  </div>
-</div>
-</div>
-<div class="lg:hidden flex h-screen w-screen flex-col justify-center items-center">
-  <div class="rounded-3xl bg-gray-800 bg-opacity-40 px-20 py-10 shadow-2xl backdrop-blur-md">
-    <div class="relative">
-      <img class="bg-cover bg-center w-36 h-36 md:w-48 md:h-48 rounded-full mx-auto mb-4"
-           src=" {% if object.userpicture %}{{ object.userpicture }}{% else %}{% static 'images/user1.svg' %}{% endif %}"
-           alt="user-picture" />
-      <h1 class="text-center mt-4 text-sm text-white text-xl md:text-3xl mb-4">Profile</h1>
-      <h1 class="text-center mt-4 mb-4 text-md text-white ">Here are your details!</h1>
-    </div>
-    <div class="flex flex-col space-y-4">
-      <div class="text-white bg-gray-800 bg-opacity-20 border border-gray-200 rounded-full text-md px-6 py-2 text-center">
-        {% if object.name %}
-          {{ object.name }}
-        {% else %}
-          Add your name in the settings
-        {% endif %}
-      </div>
-      <div class=" text-white bg-gray-800 bg-opacity-20 border border-gray-200 rounded-full text-md px-6 py-2 text-center">
-        Email: {{ object.email }}
-      </div>
-      <a href="{% url 'users:update' %}"
-         class=" text-white bg-gray-800 bg-opacity-20 border border-gray-200 rounded-full text-md px-6 py-2 text-center">
-        Click here to edit
-      </a>
+               id="email"
+               name="email"
+               class=" text-white bg-gray-800 bg-opacity-20 border border-gray-200 rounded-full text-md px-6 py-2 text-center"
+               placeholder="Email" />
+        =
+        <input type="file"
+               id="userpicture"
+               name="userpicture"
+               class="text-white bg-gray-800 bg-opacity-20 border border-gray-200 rounded-full text-md px-6 py-2 text-center"
+               placeholder="Photo" />
+        <button type="submit"
+                class="sm:mx-20 mb-4 text-white rounded-full px-10 bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium  text-sm w-full sm:w-auto  py-2.5 text-center">
+          Update
+        </button>
+      </form>
     </div>
   </div>
-</div>
 {% endblock content %}

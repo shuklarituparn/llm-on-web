@@ -12,9 +12,9 @@
 {% block content %}
   <div class="hidden lg:flex -z-50 h-screen w-screen justify-center items-center font-sans1">
     <div class="rounded-3xl bg-gray-800 bg-opacity-40 px-10 py-10 mt-16 shadow-2xl backdrop-blur-md">
-      <div class="mx-auto w-36 h-36 mb-8">
+      <div class="mx-auto w-40 h-40 mb-8">
         <img class="bg-cover bg-center w-full h-full rounded-full drop-shadow-2xl"
-             src="{% if object.userpicture %}{{ object.userpicture }}{% else %}{% static 'images/user1.svg' %}{% endif %}"
+             src="{% if object.userpicture %}/media/{{ object.userpicture }}{% else %}{% static 'images/user1.svg' %}{% endif %}"
              alt="User Picture" />
       </div>
       <div class="relative left-26 top-0 mb-8">
