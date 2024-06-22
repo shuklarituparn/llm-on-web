@@ -10,6 +10,7 @@ from django.views.generic import TemplateView
 from drf_spectacular.views import SpectacularAPIView
 from drf_spectacular.views import SpectacularSwaggerView
 from rest_framework.authtoken.views import obtain_auth_token
+from llm_on_web.users.views import user_contact_view
 
 urlpatterns = [
     path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
@@ -21,7 +22,7 @@ urlpatterns = [
     path("chat/", TemplateView.as_view(template_name="pages/chat.html"), name="chat"),
     path(
         "contact/",
-        TemplateView.as_view(template_name="pages/contact.html"),
+        view=user_contact_view,
         name="contact",
     ),
     # Django Admin, use {% url 'admin:index' %}

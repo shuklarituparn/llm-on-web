@@ -6,7 +6,7 @@
   About
 {% endblock title %}
 {% block bodyclass %}
-  bg-gemma bg-cover bg-no-repeat min-h-screen
+  bg-gemma bg-cover bg-no-repeat
 {% endblock bodyclass %}
 {% block javascript %}
   {{ block.super }}
@@ -21,15 +21,13 @@
 {% endblock javascript %}
 {% block content %}
   <div class="flex flex-col items-center justify-center">
-    <canvas class="flex flex-col h-[100px] w-[300px] items-center justify-center">
+    <canvas class="flex flex-col h-[50px] w-[300px] items-center justify-center">
       <script type="module" src="{% static 'js/project.js/' %}"></script>
     </canvas>
-    <p class="flex mt-4 mb-8 text-xl text-bold text-white text-center sm:text-6xl font-cassa">
-      We give jobs to real llamas
+    <p class="flex mt-14 mb-8 text-2xl text-bold text-white text-center sm:text-6xl font-cassa">We @Gemma, hire llamas</p>
+    <p class="flex mt-4 mb-8 text-2xl text-bold text-white text-center sm:text-6xl font-cassa">
+      and then use the LLM models that they create
     </p>
-    <p class="flex mt-4 mb-8 text-xl text-bold text-white text-center sm:text-6xl font-cassa">
-      and use the LLM models that they make
-    </p>
-    {#  <p class="flex mt-4<p class="flex mt-4 mb-8 text-6xl text-bold text-white sm:text-6xl font-cassa">and use the LLM models that they make</p> mb-8 text-6xl text-bold text-white sm:text-6xl font-cassa">and use the LLM models that they make</p>#}
+    <p class="flex mt-4  font-extrabold text-white text-center sm:text-lg font-cassa">ps. here is a 3d llama for you</p>
   </div>
 {% endblock content %}

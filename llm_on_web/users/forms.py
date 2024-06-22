@@ -2,6 +2,7 @@ from allauth.account.forms import SignupForm
 from allauth.socialaccount.forms import SignupForm as SocialSignupForm
 from django import forms
 from django.contrib.auth import forms as admin_forms
+from django.core.validators import EmailValidator
 from django.forms import EmailField
 from django.utils.translation import gettext_lazy as _
 
@@ -49,3 +50,9 @@ class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ["name", "email", "userpicture"]
+
+
+class UserContactForm(forms.Form):
+    email = forms.CharField(validators=[EmailValidator()])
+    subject = forms.CharField(max_length=255)
+    message = forms.CharField(widget=forms.Textarea)

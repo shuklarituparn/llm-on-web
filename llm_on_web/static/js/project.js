@@ -17,10 +17,10 @@ const camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerH
 camera.position.set(-10, 210, 110);
 
 const controls = new OrbitControls(camera, renderer.domElement);
-controls.minDistance = 1;
+controls.minDistance = 0;
 controls.maxDistance = 30;
 controls.minPolarAngle = 1;
-controls.maxPolarAngle =0;
+controls.maxPolarAngle =1;
 controls.target = new THREE.Vector3(0, 0, 0);
 controls.update();
 
@@ -37,6 +37,7 @@ loader.load('scene.gltf', (gltf) => {
     }
   });
   mesh.scale.set(6, 6, 6);
+  mesh.rotation.y = THREE.MathUtils.degToRad(-25);
   scene.add(mesh);
 
 });

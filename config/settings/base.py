@@ -222,10 +222,9 @@ X_FRAME_OPTIONS = "DENY"
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
 EMAIL_BACKEND = env(
     "DJANGO_EMAIL_BACKEND",
-    default="django.core.mail.backends.console.EmailBackend",
+    default="django.core.mail.backends.smtp.EmailBackend",
 )
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-timeout
-EMAIL_TIMEOUT = 5
 
 # ADMIN
 # ------------------------------------------------------------------------------
@@ -331,7 +330,25 @@ REST_FRAMEWORK = {
 }
 
 # django-cors-headers - https://github.com/adamchainz/django-cors-headers#setup
-CORS_URLS_REGEX = r"^/api/.*$"
+# CORS_URLS_REGEX = r"^/api/.*$"
+# CORS_ALLOWED_ORIGINS = [
+#     "https://3882-111-235-67-224.ngrok-free.app",
+#     "https://sub.example.com",
+#     "http://localhost:8080",
+#     "http://127.0.0.1:9000",
+# ]
+# CSRF_TRUSTED_ORIGINS = [
+#     'http://localhost:8000',  # Use a wildcard for the scheme
+#     'https://3882-111-235-67-224.ngrok-free.app',
+# ]
+# ALLOWED_HOSTS = [
+#     'localhost',
+#     '*.ngrok-free.app"'
+# ]
+# CORS_ORIGIN_WHITELIST = [
+#     'http://localhost:8000',
+#     'https://3882-111-235-67-224.ngrok-free.app'
+# ]
 
 # By Default swagger ui is available only to admin user(s). You can change permission classes to change that
 # See more configuration options at https://drf-spectacular.readthedocs.io/en/latest/settings.html#settings
@@ -344,13 +361,3 @@ SPECTACULAR_SETTINGS = {
 }
 # Your stuff...
 # ------------------------------------------------------------------------------
-
-
-# SMTP MAIL SERVER
-# ------------------------------------------------------------------
-# https://mailtrap.io
-
-EMAIL_HOST = env("EMAIL_HOST")
-EMAIL_HOST_USER = env("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
-EMAIL_PORT = env("EMAIL_PORT")
