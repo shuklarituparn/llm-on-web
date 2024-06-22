@@ -3,11 +3,34 @@
 {% load static %}
 
 {% block title %}
-  Home
+  Chat - LLava
 {% endblock title %}
 {% block bodyclass %}
   bg-gemma bg-cover bg-no-repeat min-h-screen overflow-hidden
 {% endblock bodyclass %}
+{% block javascript %}
+  {{ block.super }}
+  <script>
+    function previewImage(event) {
+      const input = event.target;
+      const preview = document.getElementById('preview');
+
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+          preview.src = e.target.result;
+          preview.style.display = 'block';
+        }
+
+        reader.readAsDataURL(input.files[0]);
+      } else {
+        preview.style.display = 'none';
+        preview.src = '';
+      }
+    }
+  </script>
+{% endblock javascript %}
 {% block content %}
   <div class="h-custom-vh w-full mt-20 px-3">
     <div class="flex flex-col rounded-3xl bg-gray-800 bg-opacity-40 py-2 px-4 md:px-24 lg:px-48 drop-shadow-2xl backdrop-blur-2xl mt-10 h-full">
@@ -38,9 +61,19 @@
           </ul>
         </div>
         <form class="flex flex-row w-screen ">
-          <input class="w-full  mb-4 py-2 px-4 bg-gray-800 bg-opacity-70 backdrop-blur-xl text-white  rounded-full"
+          <label class="block relative left-14 top-1 z-50  h-4  w-8"
+                 for="multiple_files">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 viewBox="0 0 25 25 "
+                 id="paperclip">
+              <path d="M10,22a5,5,0,0,1-5-5V9A7,7,0,0,1,19,9v7a1,1,0,0,1-2,0V9A5,5,0,0,0,7,9v8a3,3,0,0,0,6,0V9a1,1,0,0,0-2,0v7a1,1,0,0,1-2,0V9a3,3,0,0,1,6,0v8A5,5,0,0,1,10,22Z" />
+            </svg>
+          </label>
+          <input class="hidden absolute  " id="multiple_files" type="file" />
+          <img id="preview" class="preview" alt="user-input-image" />
+          <input class="w-full  mb-4 pl-20  py-2 px-4 bg-gray-800 bg-opacity-70 backdrop-blur-xl text-white  rounded-full"
                  placeholder="Ask something..." />
-          <button class="mb-4 ml-2 bg-opacity-30 bg-gray-700 backdrop-blur-xl rounded-full ">
+          <button class="mb-4 ml-2 bg-opacity-70 bg-gray-800 backdrop-blur-xl rounded-full ">
             <svg width="40px"
                  height="35px"
                  viewBox="0 -1 25 25"

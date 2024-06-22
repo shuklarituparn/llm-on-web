@@ -24,8 +24,13 @@ class Conversations(models.Model):
         related_name="conversations",
     )
     userid = models.ForeignKey(User, on_delete=models.RESTRICT)
-    llm_response = models.TextField(default="")
+    llm_response = models.TextField(default="", blank=True)
     user_query = models.TextField(default="")
+    imagequery = models.ImageField(
+        upload_to="user-images-query/",
+        blank=True,
+        null=True,
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
