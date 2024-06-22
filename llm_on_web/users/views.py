@@ -37,6 +37,17 @@ class UserUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     def get_object(self):
         return self.request.user
 
+    def form_valid(self, form_class):
+        response = super().form_valid(form_class)
+        from django.contrib.auth import login
+
+        login(
+            self.request,
+            self.object,
+            backend="allauth.account.auth_backends.AuthenticationBackend",
+        )
+        return response
+
 
 user_update_view = UserUpdateView.as_view()
 

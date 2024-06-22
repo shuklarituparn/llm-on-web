@@ -9,8 +9,10 @@ module.exports = {
         fontFamily:{
             'sans1':['sans1'],
             'cassa':['cassa'],
-        }
-
+        },
+        height: {
+          'custom-vh': 'calc(100vh - 7rem)',
+        },
     },
   },
   plugins: [],

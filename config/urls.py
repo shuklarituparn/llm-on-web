@@ -19,7 +19,7 @@ urlpatterns = [
         TemplateView.as_view(template_name="pages/about.html"),
         name="about",
     ),
-    path("chat/", TemplateView.as_view(template_name="pages/chat.html"), name="chat"),
+    path("chat/", include("llm_on_web.chat.urls"), name="chat"),
     path(
         "contact/",
         view=user_contact_view,
