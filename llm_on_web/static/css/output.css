@@ -594,6 +594,10 @@ video {
   position: relative;
 }
 
+.bottom-28 {
+  bottom: 7rem;
+}
+
 .left-10 {
   left: 2.5rem;
 }
@@ -608,6 +612,10 @@ video {
 
 .top-1 {
   top: 0.25rem;
+}
+
+.top-3 {
+  top: 0.75rem;
 }
 
 .top-5 {
@@ -741,6 +749,10 @@ video {
   height: 0.625rem;
 }
 
+.h-28 {
+  height: 7rem;
+}
+
 .h-36 {
   height: 9rem;
 }
@@ -783,6 +795,10 @@ video {
 
 .min-h-screen {
   min-height: 100vh;
+}
+
+.w-28 {
+  width: 7rem;
 }
 
 .w-36 {
@@ -1385,6 +1401,10 @@ video {
 }
 
 @media (min-width: 640px) {
+  .sm\:top-2 {
+    top: 0.5rem;
+  }
+
   .sm\:mx-20 {
     margin-left: 5rem;
     margin-right: 5rem;

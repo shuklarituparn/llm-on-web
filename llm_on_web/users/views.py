@@ -1,3 +1,5 @@
+from allauth.account.models import EmailAddress
+from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.mail import EmailMessage
@@ -25,7 +27,6 @@ user_detail_view = UserDetailView.as_view()
 
 
 class UserUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
-    model = User
     form_class = UserUpdateForm
     template_name = "users/user_form.html"
     success_message = _("Information successfully updated")
@@ -37,15 +38,21 @@ class UserUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     def get_object(self):
         return self.request.user
 
-    def form_valid(self, form_class):
-        response = super().form_valid(form_class)
-        from django.contrib.auth import login
-
-        login(
-            self.request,
-            self.object,
-            backend="allauth.account.auth_backends.AuthenticationBackend",
-        )
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        update_session_auth_hash(self.request, self.object)
+        new_email = form.cleaned_data.get("email")
+        email_address = EmailAddress.objects.filter(user=self.object).first()
+        if email_address:
+            email_address.email = new_email
+            email_address.save()
+        else:
+            EmailAddress.objects.create(
+                user=self.object,
+                email=new_email,
+                verified=True,
+                primary=True,
+            )
         return response
 
 
@@ -74,12 +81,12 @@ class UserContactView(LoginRequiredMixin, FormView):
     form_class = UserContactForm
     success_url = "/contact"
 
-    def form_valid(self, form_class):
-        email = form_class.cleaned_data["email"]
-        subject = form_class.cleaned_data["subject"]
-        message = form_class.cleaned_data["message"]
+    def form_valid(self, form):
+        email = form.cleaned_data["email"]
+        subject = form.cleaned_data["subject"]
+        message = form.cleaned_data["message"]
 
-        if form_class.is_valid():
+        if form.is_valid():
             EmailMessage(
                 subject=f"Contact form submission about {subject}",
                 body=message,
@@ -87,7 +94,7 @@ class UserContactView(LoginRequiredMixin, FormView):
                 to=[email],
             ).send(fail_silently=False)
 
-            return super().form_valid(form_class)
+            return super().form_valid(form)
 
         return redirect("contact")
 

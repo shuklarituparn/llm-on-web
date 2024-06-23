@@ -42,7 +42,7 @@
                  class=" appearance-none  text-white bg-gray-800 bg-opacity-20   border border-gray-200  rounded-full text-md px-10 py-2 text-center items-center"
                  placeholder="Photo" />
           <button type="submit"
-                  class="sm:mx-20 mb-8 text-white rounded-full px-10 backdrop-blur-md bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium  text-sm w-full sm:w-auto  py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800">
+                  class="sm:mx-20 mb-8 text-white rounded-full px-10 backdrop-blur-md  focus:ring-4 focus:outline-none  font-medium  text-sm w-full sm:w-auto  py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800">
             Update
           </button>
         </form>
@@ -55,7 +55,7 @@
         <img class="bg-cover bg-center w-36 h-36 md:w-48 md:h-48 rounded-full mx-auto mb-4"
              src=" {% if object.userpicture %}{{ object.userpicture }}{% else %}{% static 'images/user1.svg' %}{% endif %}"
              alt="user-picture" />
-        <h1 class="text-center mt-4 text-sm text-white text-xl md:text-3xl mb-4">Edit Profile</h1>
+        <h1 class="text-center mt-4  text-white text-xl md:text-3xl mb-4">Edit Profile</h1>
       </div>
       <form action="{% url 'users:update' %}"
             method="post"
