@@ -1,5 +1,4 @@
 from allauth.account.models import EmailAddress
-from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.mail import EmailMessage
@@ -40,7 +39,6 @@ class UserUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
     def form_valid(self, form):
         response = super().form_valid(form)
-        update_session_auth_hash(self.request, self.object)
         new_email = form.cleaned_data.get("email")
         email_address = EmailAddress.objects.filter(user=self.object).first()
         if email_address:
