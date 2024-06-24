@@ -7,13 +7,14 @@ from llm_on_web.users.models import User
 
 class Chatid(models.Model):
     chatid = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
-
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    chat_title = models.CharField(default="", blank=True)
     userid = models.ForeignKey(User, on_delete=models.RESTRICT, null=True)
 
+    # TODO: In implementation reference the uuid using the hex field
     def __str__(self):
-        return f"Chatid {self.chatid}"
+        return f"Chats: {self.userid}"
 
 
 class Conversations(models.Model):

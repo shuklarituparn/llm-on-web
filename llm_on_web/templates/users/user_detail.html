@@ -18,12 +18,12 @@
              alt="User Picture" />
       </div>
       <div class="relative left-26 top-0 mb-8">
-        <h1 class="VK-Sans text-center mt-9 text-white text-6xl mb-8">Profile</h1>
+        <h1 class="VK-Sans text-center mt-9 text-white text-6xl mb-8 font-sans1">Profile</h1>
       </div>
       <div class="flex flex-row py-8 items-center justify-center">
         <div class="flex flex-col space-y-14">
           <div class="flex flex-row space-x-14 items-center justify-center">
-            <p class="text-center text-xl text-white VK-Sans">Name</p>
+            <p class="text-center text-xl text-white font-sans1">Name</p>
             <svg xmlns="http://www.w3.org/2000/svg"
                  width="94"
                  height="32"
@@ -34,7 +34,7 @@
             </svg>
           </div>
           <div class="flex flex-row space-x-14 items-center justify-center">
-            <p class="text-center text-xl text-white VK-Sans">Email</p>
+            <p class="text-center text-xl text-white font-sans1">Email</p>
             <svg xmlns="http://www.w3.org/2000/svg"
                  width="94"
                  height="32"
@@ -46,14 +46,14 @@
           </div>
         </div>
         <div class="flex flex-col ml-8 space-y-10">
-          <div class=" mt-1 mb-1  text-white bg-gray-800 bg-opacity-20  border border-gray-200 rounded-full text-md px-10 py-2 text-center  items-center">
+          <div class=" mt-1 mb-1  text-white bg-gray-800 bg-opacity-20 font-sans1 border border-gray-200 rounded-full text-md px-10 py-2 text-center  items-center">
             {% if object.name %}
               {{ object.name }}
             {% else %}
               Add your name in the settings
             {% endif %}
           </div>
-          <div class="mt-1 mb-1   text-white bg-gray-800 bg-opacity-20   border border-gray-200  rounded-full text-md px-10 py-2 text-center items-center">
+          <div class="mt-1 mb-1   text-white bg-gray-800 bg-opacity-20 font-sans1  border border-gray-200  rounded-full text-md px-10 py-2 text-center items-center">
             {{ object.email }}
           </div>
         </div>
@@ -62,11 +62,11 @@
         {% if object == request.user %}
           <a href="{% url 'users:update' %}"
              role="button"
-             class="mt-1 mb-1   text-white bg-gray-800 bg-opacity-20   border border-gray-200  rounded-full text-md px-10 py-2  text-center items-center">
+             class="mt-1 mb-1   text-white bg-gray-800 bg-opacity-20   font-sans1 border border-gray-200  rounded-full text-md px-10 py-2  text-center items-center">
             Edit your profile
           </a>
         {% else %}
-          <div class="mt-1 mb-1   text-white bg-gray-800 bg-opacity-20   border border-gray-200  rounded-full text-md px-10 py-2  text-center items-center">
+          <div class="mt-1 mb-1   text-white bg-gray-800 bg-opacity-20 font-sans1   border border-gray-200  rounded-full text-md px-10 py-2  text-center items-center">
             You are not authorized
           </div>
         {% endif %}
@@ -79,22 +79,22 @@
         <img class="bg-cover bg-center w-36 h-36 md:w-48 md:h-48 rounded-full mx-auto mb-4"
              src=" {% if object.userpicture %}/media/{{ object.userpicture }}{% else %}{% static 'images/user1.svg' %}{% endif %}"
              alt="user-picture" />
-        <h1 class="text-center mt-4 text-sm text-white  md:text-3xl mb-4">Profile</h1>
-        <h1 class="text-center mt-4 mb-4 text-md text-white ">Here are your details!</h1>
+        <h1 class="text-center mt-4 text-3xl text-white font-sans1  md:text-3xl mb-4">Profile</h1>
+        <h1 class="text-center mt-4 mb-4 text-sm sm:text-md font-sans1 text-white ">Here are your details!</h1>
       </div>
       <div class="flex flex-col space-y-4">
-        <div class="text-white bg-gray-800 bg-opacity-20 border border-gray-200 rounded-full text-md px-6 py-2 text-center">
+        <div class="text-white bg-gray-800 bg-opacity-20 border border-gray-200 rounded-full text-md font-sans1 px-6 py-2 text-center">
           {% if object.name %}
             {{ object.name }}
           {% else %}
             Add your name in the settings
           {% endif %}
         </div>
-        <div class=" text-white bg-gray-800 bg-opacity-20 border border-gray-200 rounded-full text-md px-6 py-2 text-center">
+        <div class=" text-white bg-gray-800 bg-opacity-20 border border-gray-200 rounded-full font-sans1 text-md px-6 py-2 text-center">
           Email: {{ object.email }}
         </div>
         <a href="{% url 'users:update' %}"
-           class=" text-white bg-gray-800 bg-opacity-20 border border-gray-200 rounded-full text-md px-6 py-2 text-center">
+           class=" text-white bg-gray-800 bg-opacity-20 border border-gray-200 rounded-full  font-sans1 text-md px-6 py-2 text-center">
           Click here to edit
         </a>
       </div>

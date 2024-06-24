@@ -18,7 +18,7 @@
              alt="User Picture" />
       </div>
       <div class=" left-26 ">
-        <h1 class="font-sans1 text-center text-white text-6xl ">Edit Profile</h1>
+        <h1 class="font-sans1 text-center text-white text-3xl sm:text-6xl ">Edit Profile</h1>
       </div>
       <div class="flex flex-row">
         <form action="{% url 'users:update' %}"
@@ -29,20 +29,20 @@
           <input type="text"
                  id="name"
                  name="name"
-                 class="  text-white bg-gray-800 bg-opacity-20  border border-gray-200 rounded-full text-md px-16 py-2 text-center  items-center"
+                 class="  text-white bg-gray-800 bg-opacity-20  border border-gray-200 rounded-full text-md px-16 py-2 text-center font-sans1 items-center"
                  placeholder=" {% if object.name %} {{ object.name }} {% else %} Name {% endif %}" />
           <input type="email"
                  id="email"
                  name="email"
-                 class="   text-white bg-gray-800 bg-opacity-20   border border-gray-200  rounded-full text-md px-10 py-2 text-center items-center"
+                 class="   text-white bg-gray-800 bg-opacity-20   border border-gray-200  rounded-full text-md px-10 py-2 text-center font-sans1 items-center"
                  placeholder="{{ object.email }}" />
           <input type="file"
                  id="userpicture"
                  name="userpicture"
-                 class=" appearance-none  text-white bg-gray-800 bg-opacity-20   border border-gray-200  rounded-full text-md px-10 py-2 text-center items-center"
+                 class=" appearance-none  text-white bg-gray-800 bg-opacity-20   border border-gray-200  rounded-full text-md px-10 py-2 text-center font-sans1 items-center"
                  placeholder="Photo" />
           <button type="submit"
-                  class="sm:mx-20 mb-8 text-white rounded-full px-10 backdrop-blur-md  focus:ring-4 focus:outline-none  font-medium  text-sm w-full sm:w-auto  py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800">
+                  class="sm:mx-20 mb-8 text-white rounded-full px-10 backdrop-blur-md font-sans1  focus:ring-4 focus:outline-none  font-medium  text-sm w-full sm:w-auto  py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800">
             Update
           </button>
         </form>
@@ -50,13 +50,11 @@
     </div>
   </div>
   <div class="lg:hidden flex h-screen w-screen flex-col justify-center items-center">
-    <div class="rounded-3xl bg-gray-800 bg-opacity-40 px-20 py-10 shadow-2xl backdrop-blur-md">
-      <div class="relative">
-        <img class="bg-cover bg-center w-36 h-36 md:w-48 md:h-48 rounded-full mx-auto mb-4"
-             src=" {% if object.userpicture %}{{ object.userpicture }}{% else %}{% static 'images/user1.svg' %}{% endif %}"
-             alt="user-picture" />
-        <h1 class="text-center mt-4  text-white text-xl md:text-3xl mb-4">Edit Profile</h1>
-      </div>
+    <div class="rounded-3xl bg-gray-800 bg-opacity-40 sm:px-20 sm:py-10 px-14 py-6 shadow-2xl backdrop-blur-md">
+      <img class="bg-cover bg-center w-36 h-36 md:w-48 md:h-48 rounded-full mx-auto mb-4"
+           src=" {% if object.userpicture %}/media/{{ object.userpicture }}{% else %}{% static 'images/user1.svg' %}{% endif %}"
+           alt="user-picture" />
+      <h1 class="text-center mt-4  text-white text-3xl md:text-3xl mb-4 font-sans1">Edit Profile</h1>
       <form action="{% url 'users:update' %}"
             method="post"
             class="flex flex-col space-y-4">
@@ -64,21 +62,20 @@
         <input type="text"
                id="name"
                name="name"
-               class="text-white bg-gray-800 bg-opacity-20 border border-gray-200 rounded-full text-md px-6 py-2 text-center"
+               class="text-white bg-gray-800 font-sans1 bg-opacity-20 border border-gray-200 rounded-full text-md px-6 py-2 text-center"
                placeholder="Name" />
         <input type="email"
                id="email"
                name="email"
-               class=" text-white bg-gray-800 bg-opacity-20 border border-gray-200 rounded-full text-md px-6 py-2 text-center"
+               class=" text-white bg-gray-800 font-sans1 bg-opacity-20 border border-gray-200 rounded-full text-md px-6 py-2 text-center"
                placeholder="Email" />
-        =
         <input type="file"
                id="userpicture"
                name="userpicture"
-               class="text-white bg-gray-800 bg-opacity-20 border border-gray-200 rounded-full text-md px-6 py-2 text-center"
+               class="text-white bg-gray-800 font-sans1 bg-opacity-20 border border-gray-200 rounded-full text-md px-6 py-2 text-center"
                placeholder="Photo" />
         <button type="submit"
-                class="sm:mx-20 mb-4 text-white rounded-full px-10 bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium  text-sm w-full sm:w-auto  py-2.5 text-center">
+                class="sm:mx-20 mb-4 text-white font-sans1 rounded-full px-10 bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium  text-sm w-full sm:w-auto  py-2.5 text-center">
           Update
         </button>
       </form>

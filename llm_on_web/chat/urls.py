@@ -9,4 +9,9 @@ urlpatterns = [
         TemplateView.as_view(template_name="pages/chat_llava.html"),
         name="llava",
     ),
+    path(
+        "llava/conversations/",
+        TemplateView.as_view(template_name="pages/chat_llava.html"),
+        name="llava_conversation",
+    ),
 ]

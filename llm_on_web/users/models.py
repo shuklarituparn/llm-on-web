@@ -24,6 +24,7 @@ class User(AbstractUser):
     email = EmailField(_("email address"), unique=True)
     username = None  # type: ignore[assignment]
     userpicture = models.ImageField(upload_to="user_pictures/", blank=True, null=True)
+    currentchatid = models.CharField(default="", blank=True)
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 
