@@ -19,13 +19,13 @@
                width="140"
                height="140"
                alt="login logo" />
-          <p class="mt-4 mb-8 text-3xl sm:text-5xl ">Logout</p>
+          <p class="mt-6 mb-8 text-3xl sm:text-5xl bg-cyan-400 rounded-full text-gray-800 font-sans1 px-3 py-2 ">Logout</p>
           <p class="mt-4 mb-4 text-md sm:text-3xl">Are you sure you want to logout?</p>
         </div>
         <div class="py-2 space-x-20">
           <form action="{% url 'account_logout' %}"
                 method="post"
-                class="py-6 flex sm:flex-col justify-evenly  items-center  space-x-20">
+                class="py-6 flex sm:flex-row sm:justify-between space-x-11 items-center  sm:space-x-20">
             <a href="{% url 'home' %}"
                class="sm:mx-20 mb-4 text-white rounded-xl px-10 bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium  text-sm w-full sm:w-auto  py-2.5 text-center">
               No
