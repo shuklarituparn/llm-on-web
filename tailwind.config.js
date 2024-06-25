@@ -11,9 +11,11 @@ module.exports = {
             'cassa':['cassa'],
         },
         height: {
-          'custom-vh': 'calc(100vh - 7rem)',
+          'custom-vh': 'calc(100vh - 6rem)',
         },
     },
   },
-  plugins: [],
+  plugins: [
+      require('tailwind-scrollbar'),
+  ],
 }
