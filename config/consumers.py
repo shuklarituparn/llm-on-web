@@ -1,17 +1,17 @@
-from channels.generic.websocket import WebsocketConsumer
+from channels.generic.websocket import AsyncWebsocketConsumer
 
 
-class ChatGuestConsumer(WebsocketConsumer):
+class ChatGuestConsumer(AsyncWebsocketConsumer):
     pass
 
 
-class ChatUserConsumer(WebsocketConsumer):
+class ChatUserConsumer(AsyncWebsocketConsumer):
     pass
 
 
-class ChatLlavaGConsumer(WebsocketConsumer):
+class ChatLlavaGConsumer(AsyncWebsocketConsumer):
     pass
 
 
-class ChatLlavaUConsumer(WebsocketConsumer):
+class ChatLlavaUConsumer(AsyncWebsocketConsumer):
     pass

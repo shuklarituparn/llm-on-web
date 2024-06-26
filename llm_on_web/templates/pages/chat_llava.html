@@ -13,9 +13,9 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       function previewImage() {
-        var preview = document.querySelector('#preview');
-        var file = document.querySelector('input[type=file]').files[0];
-        var reader = new FileReader();
+        const preview = document.querySelector('#preview');
+        const file = document.querySelector('input[type=file]').files[0];
+        const reader = new FileReader();
 
         reader.onloadend = function() {
           preview.src = reader.result;
@@ -31,7 +31,7 @@
       }
 
       function makeinvisible() {
-        var preview = document.querySelector('#preview');
+        const preview = document.querySelector('#preview');
         preview.classList.add('hidden')
       }
       document.getElementById('multiple_files').addEventListener('change', previewImage);
@@ -40,14 +40,18 @@
   </script>
 {% endblock javascript %}
 {% block content %}
-  <div class="h-custom-vh w-full mt-20 px-3">
+  <div class="h-custom-vh w-full mt-20 px-3 overflow-y-clip appearance-none">
     <div class="flex flex-col rounded-3xl bg-gray-800 bg-opacity-40 py-2 px-4 md:px-24 lg:px-48 drop-shadow-2xl backdrop-blur-2xl mt-10 h-full">
-      <h1 class="absolute top-5 left-10 font-sans1 text-white text-2xl hover:text-cyan-300 text-semibold md:text-4xl">
+      <h1 class="absolute top-5 left-10 font-sans1  text-black text-2xl text-semibold md:text-4xl hover:text-white bg-cyan-400 rounded-full px-4 py-1">
         Chat
       </h1>
-      <div id="chat-response"
-           class="flex-1 flex flex-col mt-20 ml-16 md:mt-8 sm:mt-16 sm:ml-16 "></div>
+      <div id="chat-container" class="flex flex-col h-screen overflow-y-auto">
+        <div id="chat-response" class="flex-1 overflow-y-auto px-4 py-6 sm:px-16">
+          {# Here the response will be rendered #}
+        </div>
+      </div>
       <div class="flex flex-row space-x-6">
+        SyntaxError: import declarations may only appear at top level of a module
         <button id="dropdownDefaultButton"
                 data-dropdown-toggle="dropdown"
                 data-dropdown-placement="top"
@@ -72,7 +76,8 @@
           </ul>
         </div>
         <form action="{% url 'chat:llava_conversation' %}"
-              class="flex flex-row  w-screen">
+              class="flex flex-row  w-screen"
+              if>
           {% csrf_token %}
           <label class="block relative left-14 cursor-pointer  top-3 sm:top-2 z-50 h-4 w-8"
                  for="multiple_files">
