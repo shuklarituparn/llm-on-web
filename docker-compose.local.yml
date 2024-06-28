@@ -13,14 +13,13 @@ services:
     depends_on:
       - postgres
       - redis
-      - mailpit
     volumes:
       - .:/app:z
     env_file:
       - ./.envs/.local/.django
       - ./.envs/.local/.postgres
     ports:
-      - '8000:8000'
+      - '8091:8000'
     command: /start
 
   postgres:
@@ -35,11 +34,6 @@ services:
     env_file:
       - ./.envs/.local/.postgres
 
-  mailpit:
-    image: docker.io/axllent/mailpit:latest
-    container_name: llm_on_web_local_mailpit
-    ports:
-      - "8025:8025"
 
   redis:
     image: docker.io/redis:6
