@@ -20,6 +20,8 @@ services:
       - ./.envs/.local/.postgres
     ports:
       - '8091:8000'
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     command: /start
 
   postgres:
