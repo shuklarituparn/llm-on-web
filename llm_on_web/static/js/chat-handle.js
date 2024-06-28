@@ -36,16 +36,22 @@ const chatResponse=document.getElementById("chat-response")
         console.log("Recieved response from the server:", e.data)
         const messagefromserver=JSON.parse(e.data);
         const chatResponse=document.getElementById("chat-response");
-        const llmresponseContainer=document.createElement('div');
-        llmresponseContainer.classList.add('flex', 'justify-start');
-        chatResponse.appendChild(llmresponseContainer);
-        const llmresponseText=document.createElement('div');
-        llmresponseText.id ='llm-response';
-        llmresponseText.classList.add('bg-opacity-30','mt-8','mb-2','bg-gray-800', 'text-white', 'font-sans1', 'rounded-lg', 'py-2', 'px-4', 'max-w-sm', 'max-h-64', 'overflow-y-auto', 'outline', 'outline-offset-2', 'outline-cyan-500');
-        llmresponseText.textContent=messagefromserver.message;
-        llmresponseContainer.appendChild(llmresponseText);
-        console.log(llmresponseText);
-        console.log(messagefromserver);
+        const conv_id = messagefromserver['conv_id'];
+        let llm_container = document.getElementById(`llm-response_${conv_id}`);
+        if (!messagefromserver.done) {
+            if (!llm_container) {
+                const llmresponseContainer = document.createElement('div');
+                llmresponseContainer.classList.add('flex', 'justify-start');
+                llm_container = document.createElement('div');
+                llm_container.id = `llm-response_${conv_id}`;
+                llm_container.classList.add('bg-opacity-30', 'mt-2', 'mb-2', 'bg-gray-800', 'text-white', 'font-sans1', 'rounded-lg', 'py-2', 'px-4', 'max-w-sm', 'max-h-64', 'overflow-y-auto', 'outline', 'outline-offset-2', 'outline-cyan-500');
+                llm_container.textContent = messagefromserver.message;
+                llmresponseContainer.appendChild(llm_container);
+                chatResponse.appendChild(llmresponseContainer);
+            } else {
+                llm_container.textContent += ' ' + messagefromserver.message;
+            }
+        }
     })
     websocketUser.addEventListener('message', (e) => {
         console.log("Received response from the server:", e.data);
