@@ -2,6 +2,7 @@ from allauth.account.models import EmailAddress
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.mail import EmailMessage
+from django.core.mail import get_connection
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
@@ -11,6 +12,10 @@ from django.views.generic import RedirectView
 from django.views.generic import TemplateView
 from django.views.generic import UpdateView
 
+from config.settings.local import RESEND_API_KEY
+from config.settings.local import RESEND_SMTP_HOST
+from config.settings.local import RESEND_SMTP_PORT
+from config.settings.local import RESEND_SMTP_USERNAME
 from llm_on_web.users.forms import UserContactForm
 from llm_on_web.users.forms import UserUpdateForm
 from llm_on_web.users.models import User
@@ -86,14 +91,25 @@ class UserContactView(LoginRequiredMixin, FormView):
         email = form.cleaned_data["email"]
         subject = form.cleaned_data["subject"]
         message = form.cleaned_data["message"]
+        from_email = "gemma_support@appsupport.shukla.ru"
+        body1 = "Thank you for contacting us"
+        body2 = f"we got the following message: {message}"
 
         if form.is_valid():
-            EmailMessage(
-                subject=f"Contact form submission about {subject}",
-                body=message,
-                from_email="rtprnshukla@gmail.com",
-                to=[email],
-            ).send(fail_silently=False)
+            with get_connection(
+                host=RESEND_SMTP_HOST,
+                port=RESEND_SMTP_PORT,
+                username=RESEND_SMTP_USERNAME,
+                password=RESEND_API_KEY,
+                use_tls=True,
+            ) as connection:
+                EmailMessage(
+                    subject=subject,
+                    body=body1 + body2,
+                    to=[email],
+                    from_email=from_email,
+                    connection=connection,
+                ).send(fail_silently=False)
 
             return super().form_valid(form)
 

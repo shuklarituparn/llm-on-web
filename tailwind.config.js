@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./llm_on_web/templates/**/*.html"],
+  content: ["./llm_on_web/templates/**/*.html", "./llm_on_web/static/**/*.js"],
   theme: {
     extend: {
         backgroundImage:{

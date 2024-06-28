@@ -1,4 +1,6 @@
 # ruff: noqa: E501
+import os
+
 from .base import *  # noqa: F403
 from .base import INSTALLED_APPS
 from .base import MIDDLEWARE
@@ -28,24 +30,23 @@ CACHES = {
 
 AUTH_USER_MODEL = "users.User"
 
-
 # EMAIL
 # ------------------------------------------------------------------------------
 EMAIL_BACKEND = env(
     "DJANGO_EMAIL_BACKEND",
     default="django.core.mail.backends.smtp.EmailBackend",
 )
-EMAIL_HOST = env("EMAIL_HOST")
-EMAIL_HOST_USER = env("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
-EMAIL_PORT = env("EMAIL_PORT")
 
+
+RESEND_SMTP_HOST = "smtp.resend.com"
+RESEND_SMTP_PORT = "587"
+RESEND_SMTP_USERNAME = "resend"
+RESEND_API_KEY = os.environ["RESEND_API_KEY"]
 
 # WhiteNoise
 # ------------------------------------------------------------------------------
 # http://whitenoise.evans.io/en/latest/django.html#using-whitenoise-in-development
 INSTALLED_APPS = ["whitenoise.runserver_nostatic", *INSTALLED_APPS]
-
 
 # django-debug-toolbar
 # ------------------------------------------------------------------------------

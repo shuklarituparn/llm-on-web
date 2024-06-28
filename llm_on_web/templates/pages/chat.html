@@ -68,7 +68,7 @@
           <input class="hidden"
                  name="who"
                  id="who"
-                 value="{% if request.user.is_authenticated %} {{ request.user.pk }} {% else %} guest {% endif %} " />
+                 value="{% if request.user.is_authenticated %} {{ request.user.pk }} {% else %}guest{% endif %} " />
           <button class="mb-4 ml-2 bg-opacity-70 bg-gray-800 backdrop-blur-xl rounded-full hover:bg-gradient-to-r hover:from-cyan-300 hover:to-blue-500"
                   type="submit">
             <svg width="40px"

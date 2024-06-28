@@ -18,11 +18,11 @@ framework.
 import os
 import sys
 from pathlib import Path
-
 from django.core.wsgi import get_wsgi_application
 
 # This allows easy placement of apps within the interior
 # llm_on_web directory.
+
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 sys.path.append(str(BASE_DIR / "llm_on_web"))
 # We defer to a DJANGO_SETTINGS_MODULE already in the environment. This breaks
