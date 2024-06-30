@@ -18,8 +18,11 @@ services:
     env_file:
       - ./.envs/.local/.django
       - ./.envs/.local/.postgres
+      - .env
     ports:
       - '8091:8000'
+    environment:
+      - DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1] host.docker.internal
     extra_hosts:
       - "host.docker.internal:host-gateway"
     command: /start
@@ -43,34 +46,3 @@ services:
 
     volumes:
       - llm_on_web_local_redis_data:/data
-
-
-  celeryworker:
-    <<: *django
-    image: llm_on_web_local_celeryworker
-    container_name: llm_on_web_local_celeryworker
-    depends_on:
-      - redis
-      - postgres
-      - mailpit
-    ports: []
-    command: /start-celeryworker
-
-  celerybeat:
-    <<: *django
-    image: llm_on_web_local_celerybeat
-    container_name: llm_on_web_local_celerybeat
-    depends_on:
-      - redis
-      - postgres
-      - mailpit
-    ports: []
-    command: /start-celerybeat
-
-  flower:
-    <<: *django
-    image: llm_on_web_local_flower
-    container_name: llm_on_web_local_flower
-    ports:
-      - '5555:5555'
-    command: /start-flower
