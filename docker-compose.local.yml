@@ -20,7 +20,6 @@ services:
       - ./.envs/.local/.postgres
     environment:
       - RESEND_API_KEY: re_dJxgRA8p_Pya8cgGjKN5NY7ANeX5wTe4F
-
     ports:
       - '8091:8000'
     extra_hosts:
