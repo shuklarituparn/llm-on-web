@@ -8,38 +8,9 @@
 {% block bodyclass %}
   bg-gemma bg-cover bg-no-repeat min-h-screen overflow-hidden
 {% endblock bodyclass %}
-{% block javascript %}
-  {{ block.super }}
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      function previewImage() {
-        const preview = document.querySelector('#preview');
-        const file = document.querySelector('input[type=file]').files[0];
-        const reader = new FileReader();
-
-        reader.onloadend = function() {
-          preview.src = reader.result;
-        }
-
-        if (file) {
-          reader.readAsDataURL(file);
-          preview.classList.remove('hidden')
-        } else {
-          preview.src = "";
-          preview.classList.add('hidden')
-        }
-      }
-
-      function makeinvisible() {
-        const preview = document.querySelector('#preview');
-        preview.classList.add('hidden')
-      }
-      document.getElementById('multiple_files').addEventListener('change', previewImage);
-      document.getElementById('form-submit').addEventListener('click', makeinvisible);
-    });
-  </script>
-  <script src="{% static 'js/chat-llava-handle.js' %}"></script>
-{% endblock javascript %}
+{% block inline_javascript %}
+  <script src="{% static 'js/chat-llava-handle.js' %}"  type="module"></script>
+{% endblock inline_javascript %}
 {% block content %}
   <div class="h-custom-vh w-full mt-20 px-3 overflow-y-clip appearance-none">
     <div class="flex flex-col rounded-3xl bg-gray-800 bg-opacity-40 py-2 px-4 md:px-24 lg:px-48 drop-shadow-2xl backdrop-blur-2xl mt-10 h-full">
@@ -88,7 +59,8 @@
         </div>
         <form action="{% url 'chat:llava_conversation' %}"
               class="flex flex-row  w-screen"
-              if>
+              id="user_image_form"
+              name="user_image_form">
           {% csrf_token %}
           <label class="block relative left-14 cursor-pointer  top-3 sm:top-2 z-50 h-4 w-8"
                  for="multiple_files">
@@ -107,6 +79,10 @@
                  name="user_query"
                  id="user_query"
                  placeholder="Ask something..." />
+          <input class="hidden"
+                 name="who"
+                 id="who"
+                 value="{% if request.user.is_authenticated %} {{ request.user.pk }} {% else %}guest{% endif %} " />
           <button id="form-submit"
                   type="submit"
                   name="submit"

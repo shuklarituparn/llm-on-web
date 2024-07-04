@@ -347,3 +347,5 @@ llm_on_web/media/
 env
 .envs/*
 !.envs/.local/
+
+todo.txt

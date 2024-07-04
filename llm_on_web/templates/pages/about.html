@@ -9,7 +9,6 @@
   bg-gemma bg-cover bg-no-repeat overflow-hidden
 {% endblock bodyclass %}
 {% block javascript %}
-  {{ block.super }}
   <script type="importmap">
     {
       "imports": {
@@ -18,11 +17,11 @@
       }
     }
   </script>
+  <script src="{% static 'js/project.js/' %}" type="module"></script>
 {% endblock javascript %}
 {% block content %}
   <div class="flex flex-col items-center justify-center">
     <canvas class="flex flex-col h-[50px] w-[300px] items-center justify-center">
-      <script type="module" src="{% static 'js/project.js/' %}"></script>
     </canvas>
     <p class="flex mt-14 mb-8 text-2xl text-bold text-white text-center sm:text-6xl font-cassa">We @Gemma, hire llamas</p>
     <p class="flex mt-4 mb-8 text-2xl text-bold text-white text-center sm:text-6xl font-cassa">
