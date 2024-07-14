@@ -10,7 +10,7 @@ websocket_urlpatterns = [
     ),
     re_path(r"ws/chat/user/", consumers.ChatUserConsumer.as_asgi(), name="chat_user"),
     re_path(
-        r"ws/chat/llava/",
+        r"ws/chat/llava/guest/",
         consumers.ChatLlavaGConsumer.as_asgi(),
         name="llava_guest",
     ),

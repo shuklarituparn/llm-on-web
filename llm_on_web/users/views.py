@@ -82,6 +82,16 @@ class UserConversationsView(LoginRequiredMixin, TemplateView):
 user_conversations_view = UserConversationsView.as_view()
 
 
+class UserConversationsDetailedView(LoginRequiredMixin, TemplateView):
+    template_name = "users/conversations.html"
+
+    #  TODO: To get the list of conversations and render the conversations
+    #  TODO: To change it from Templateview to the list
+
+
+user_conversations_detailed_view = UserConversationsDetailedView.as_view()
+
+
 class UserContactView(LoginRequiredMixin, FormView):
     template_name = "pages/contact.html"
     form_class = UserContactForm

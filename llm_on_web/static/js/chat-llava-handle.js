@@ -2,11 +2,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
     const protocol=window.location.protocol=== 'https:'? 'wss:' : 'ws:';
     const form=document.getElementById('user_image_form');
     const chatResponse=document.getElementById("chat-response");
-    const websocketUser=websocketconnection('ws/chat/llava/');
-    const websocketGuest=websocketconnection('ws/chat/llava/user/');
+    const websocketUser=websocketconnection('ws/chat/llava/user/');
+    const websocketGuest=websocketconnection('ws/chat/llava/guest/');
     document.getElementById('multiple_files').addEventListener('change', previewImage);
     document.getElementById('form-submit').addEventListener('click', makeinvisible);
 
+    // TODO: After sending the image, clear the image, to allow the user to upload other image
     let base64imagedata;
     function previewImage() {
         const preview = document.querySelector('#preview');
@@ -25,9 +26,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
           preview.classList.add('hidden')
         }
     }
-    // Todo: got the base64,send the data back
-    // Todo: Render the image using the base64 src
-    // Todo: Get the reply and render it back again
     function makeinvisible() {
         const preview = document.querySelector('#preview');
         preview.classList.add('hidden')
@@ -59,10 +57,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
         console.log(base64imagedata)
         const imgDataToServer=base64imagedata.split("base64,")[1]
         if (id === 'guest') {
-            websocketGuest.send(JSON.stringify({id, message, imgDataToServer}));
+            websocketGuest.send(JSON.stringify({id, message, imgDataToServer, base64imagedata}));
 
         }else{
-            websocketUser.send(JSON.stringify({id, message, imgDataToServer}));
+            websocketUser.send(JSON.stringify({id, message, imgDataToServer, base64imagedata}));
 
         }
     })
