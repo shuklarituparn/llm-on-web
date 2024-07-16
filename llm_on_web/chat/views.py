@@ -3,8 +3,6 @@ from datetime import datetime
 import pytz
 from django.shortcuts import render
 from django.views.generic import TemplateView
-from django.views.generic.edit import FormMixin
-from django.views.generic.list import ListView
 
 from llm_on_web.users.models import User
 
@@ -13,19 +11,14 @@ from .models import Chatid
 
 class ChatMixin:
     def handle_authenticated_user(self, request):
+        current_user = User.objects.get(pk=request.user.pk)
         chat_title = str(datetime.now(pytz.utc))
         newchat = Chatid.objects.create(chat_title=chat_title)
+        newchat.userid = current_user
         newchat.save()
         current_chat_id = newchat.chatid
-        current_user = User.objects.get(pk=request.user.pk)
         current_user.currentchatid = current_chat_id
         current_user.save()
-
-
-class ConversationView(FormMixin, ListView):
-    # Todo: Here I need to get the user conversations from the db,
-    #  like get all and render by conversation id
-    pass
 
 
 class ChatView(ChatMixin, TemplateView):

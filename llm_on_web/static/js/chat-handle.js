@@ -3,7 +3,7 @@ const protocol=window.location.protocol=== 'https:'? 'wss:' : 'ws:';
 const form=document.getElementById('user_query_form');
 const chatResponse=document.getElementById("chat-response")
     function websocketconnection(parameters) {
-        return new WebSocket(protocol + '//'+'localhost:8000/' + parameters);
+        return new WebSocket(protocol + '//'+'localhost:8091/' + parameters);
     }
     const websocketUser=websocketconnection('ws/chat/user/')
     const websocketGuest=websocketconnection('ws/chat/guest/')

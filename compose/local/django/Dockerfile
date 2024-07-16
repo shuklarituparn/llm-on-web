@@ -87,5 +87,4 @@ RUN chmod +x /start-flower
 
 # copy application code to WORKDIR
 COPY . ${APP_HOME}
-
 ENTRYPOINT ["/entrypoint"]

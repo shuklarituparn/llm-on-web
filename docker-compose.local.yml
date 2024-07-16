@@ -1,3 +1,5 @@
+version: '3.7'
+
 volumes:
   llm_on_web_local_postgres_data: {}
   llm_on_web_local_postgres_data_backups: {}
@@ -18,12 +20,13 @@ services:
     env_file:
       - ./.envs/.local/.django
       - ./.envs/.local/.postgres
+      - .env
     environment:
-      - RESEND_API_KEY: re_dJxgRA8p_Pya8cgGjKN5NY7ANeX5wTe4F
+      - RESEND_API_KEY="re_dJxgRA8p_Pya8cgGjKN5NY7ANeX5wTe4F"
     ports:
       - '8091:8000'
     extra_hosts:
-      - "host.docker.internal:host-gateway"
+       - "host.docker.internal:host-gateway"
     command: /start
 
   postgres:
@@ -38,14 +41,11 @@ services:
     env_file:
       - ./.envs/.local/.postgres
 
-
   redis:
     image: docker.io/redis:6
     container_name: llm_on_web_local_redis
-
     volumes:
       - llm_on_web_local_redis_data:/data
-
 
   celeryworker:
     <<: *django
@@ -54,7 +54,6 @@ services:
     depends_on:
       - redis
       - postgres
-      - mailpit
     ports: []
     command: /start-celeryworker
 
@@ -65,7 +64,6 @@ services:
     depends_on:
       - redis
       - postgres
-      - mailpit
     ports: []
     command: /start-celerybeat
 

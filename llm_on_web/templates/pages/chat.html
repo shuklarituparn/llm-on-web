@@ -13,8 +13,8 @@
   <script src="{% static 'js/chat-handle.js' %}"></script>
 {% endblock javascript %}
 {% block content %}
-  <div class="h-custom-vh w-full max-sm:mt-4 lg:mt-20 sm:mt-2 max-sm:py-10  px-3  overflow-y-clip appearance-none ">
-    <div class="flex flex-col rounded-3xl bg-gray-800 bg-opacity-40 py-2 px-4 md:px-24 lg:px-48 drop-shadow-2xl backdrop-blur-2xl mt-10 h-full">
+  <div class="h-custom-vh w-full max-sm:mt-4 lg:mt-20 sm:mt-20 max-sm:py-10  px-3 overflow-y-clip appearance-none ">
+    <div class="flex flex-col rounded-3xl bg-gray-800 bg-opacity-40 py-2 px-4  lg:px-20 drop-shadow-2xl backdrop-blur-2xl mt-10 h-full">
       <h1 class=" absolute top-5 left-10 font-sans1  text-black text-2xl text-semibold md:text-4xl hover:text-white bg-cyan-400 rounded-full px-4 py-1">
         Chat
       </h1>
@@ -33,6 +33,7 @@
            class="flex mt-10 flex-col h-screen overflow-y-auto">
         <div id="chat-response"
              class="mt-4 flex-1 overflow-y-auto px-4 py-6 sm:px-16"></div>
+        {# TODO: TO RENDER THE CHAT RESPONSE HERE #}
       </div>
       <div class="flex flex-row space-x-6">
         <button id="dropdownDefaultButton"

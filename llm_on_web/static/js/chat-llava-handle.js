@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         preview.classList.add('hidden')
       }
     function websocketconnection(parameters) {
-        return new WebSocket(protocol + '//'+'localhost:8000/' + parameters);
+        return new WebSocket(protocol + '//'+'localhost:8091/' + parameters);
     }
 
     form.addEventListener('submit', (e)=>{

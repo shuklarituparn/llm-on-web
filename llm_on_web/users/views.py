@@ -1,9 +1,13 @@
+# ruff: noqa: E501
+
 from allauth.account.models import EmailAddress
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.mail import EmailMessage
 from django.core.mail import get_connection
+from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
+from django.shortcuts import render
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import DetailView
@@ -16,6 +20,8 @@ from config.settings.local import RESEND_API_KEY
 from config.settings.local import RESEND_SMTP_HOST
 from config.settings.local import RESEND_SMTP_PORT
 from config.settings.local import RESEND_SMTP_USERNAME
+from llm_on_web.chat.models import Chatid
+from llm_on_web.chat.models import Conversations
 from llm_on_web.users.forms import UserContactForm
 from llm_on_web.users.forms import UserUpdateForm
 from llm_on_web.users.models import User
@@ -75,18 +81,33 @@ user_redirect_view = UserRedirectView.as_view()
 class UserConversationsView(LoginRequiredMixin, TemplateView):
     template_name = "users/conversations.html"
 
-    #  TODO: To get the list of conversations and render the conversations
-    #  TODO: To change it from Templateview to the list
+    def get(self, request, *args, **kwargs):
+        user = User.objects.get(pk=request.user.pk)
+        user_chats = Chatid.objects.filter(userid=user)
+        conversations_with_chatid = (
+            Conversations.objects.filter(chatid__in=user_chats)
+            .select_related("chatid")
+            .all()
+        )
+        unique_chatids = {
+            conversation.chatid for conversation in conversations_with_chatid
+        }
+        context = {"chats": unique_chatids}
+        return render(request, template_name=self.template_name, context=context)
 
 
 user_conversations_view = UserConversationsView.as_view()
 
 
 class UserConversationsDetailedView(LoginRequiredMixin, TemplateView):
-    template_name = "users/conversations.html"
+    template_name = "users/conversations_detailed.html"  # corrected the conversations
 
-    #  TODO: To get the list of conversations and render the conversations
-    #  TODO: To change it from Templateview to the list
+    def get(self, request, *args, **kwargs):
+        queridtid = kwargs.get("conversationid")
+        chatid = get_object_or_404(Chatid, chatid=queridtid)
+        user_conversations = Conversations.objects.filter(chatid=chatid)
+        context = {"user_conversations": user_conversations}
+        return self.render_to_response(context)
 
 
 user_conversations_detailed_view = UserConversationsDetailedView.as_view()

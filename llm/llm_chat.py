@@ -3,15 +3,13 @@ from http import HTTPStatus
 import ollama
 from ollama import AsyncClient
 
-model = "llama3"
 
-
-async def modelcheck():
+async def modelcheck(model: str):
     try:
-        ollama.chat(model)
+        await ollama.chat(model)
     except ollama.ResponseError as e:
         if e.status_code == HTTPStatus.NOT_FOUND:
-            ollama.pull(model)
+            await ollama.pull(model)
             return False
 
 

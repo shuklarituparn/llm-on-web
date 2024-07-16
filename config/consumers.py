@@ -12,7 +12,7 @@ async def chat(self, usermessage: str, pk):
     message = {"role": "user", "content": f"{usermessage}"}
     conv_id = str(uuid.uuid4())
     responsellm = ""
-    async for part in await AsyncClient().chat(
+    async for part in await AsyncClient(host="http://host.docker.internal:11434/").chat(
         model="llama3",
         messages=[message],
         stream=True,
@@ -34,7 +34,7 @@ async def chat(self, usermessage: str, pk):
 async def chatllava(self, usermessage: str, image: str, pk):
     conv_id = str(uuid.uuid4())
     responsellm_llava = ""
-    async for response in await AsyncClient().generate(
+    async for response in await AsyncClient(host="http://localhost:11434").generate(
         "bakllava",
         usermessage,
         images=[image],
@@ -105,7 +105,6 @@ class ChatLlavaUConsumer(AsyncWebsocketConsumer):
         await self.accept()
 
     async def receive(self, text_data=None, bytes_data=None):
-        # data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD
         data = json.loads(text_data)
         usermessage = data["message"]
         imagedata = data["imgDataToServer"]
@@ -143,16 +142,14 @@ def create_conversations(pk, responsellm, usermessage, model, image):
         "user_query": usermessage,
         "userid_id": pk,
     }
-    imgformat, imagedata = image.split(";base64,")
-    imagedata += "===="
-    imageformat = imgformat.split("/")[-1]
-    imagecontent = ContentFile(
-        base64.standard_b64decode(imagedata),
-        name=f"{uuid.uuid4()!s}.{imageformat}",
-    )
-
     if model == "bakllava" and image:
-        # Todo: Need to convert it to the image format and save it
+        imgformat, imagedata = image.split(";base64,")
+        imagedata += "===="
+        imageformat = imgformat.split("/")[-1]
+        imagecontent = ContentFile(
+            base64.standard_b64decode(imagedata),
+            name=f"{uuid.uuid4()!s}.{imageformat}",
+        )
         conversation_data["imagequery"] = imagecontent
 
     Conversations.objects.create(**conversation_data)
