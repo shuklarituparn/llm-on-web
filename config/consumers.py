@@ -34,7 +34,9 @@ async def chat(self, usermessage: str, pk):
 async def chatllava(self, usermessage: str, image: str, pk):
     conv_id = str(uuid.uuid4())
     responsellm_llava = ""
-    async for response in await AsyncClient(host="http://localhost:11434").generate(
+    async for response in await AsyncClient(
+        host="http://host.docker.internal:11434",
+    ).generate(
         "bakllava",
         usermessage,
         images=[image],
