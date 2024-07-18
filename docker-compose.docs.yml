@@ -7,6 +7,7 @@ services:
       dockerfile: ./compose/local/docs/Dockerfile
     env_file:
       - ./.envs/.local/.django
+      - .env
     volumes:
       - ./docs:/docs:z
       - ./config:/app/config:z

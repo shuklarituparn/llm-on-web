@@ -340,6 +340,8 @@ dump.rdb
 ### Project template
 llm_on_web/media/
 
+llm_on_web/.idea
+
 .idea
 
 .pytest_cache/

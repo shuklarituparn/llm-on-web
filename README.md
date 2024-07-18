@@ -1,3 +1,2 @@
-# llm_on_web
-
+# Gemma
 Web app to interact with LLM locally
