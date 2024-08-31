@@ -83,3 +83,12 @@ INSTALLED_APPS += ["django_extensions"]
 CELERY_TASK_EAGER_PROPAGATES = True
 # Your stuff...
 # ------------------------------------------------------------------------------
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://gemma.shukla.ru',
+    'http://localhost',
+    'http://127.0.0.1',
+    'http://[::1]',
+    'http://host.docker.internal',
+    # Add other origins if needed
+]

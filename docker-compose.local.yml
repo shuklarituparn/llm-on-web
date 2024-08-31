@@ -22,7 +22,7 @@ services:
     ports:
       - '8091:8000'
     environment:
-      - DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1] host.docker.internal
+      - DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1] host.docker.internal gemma.shukla.ru www.gemma.shukla.ru
     extra_hosts:
       - "host.docker.internal:host-gateway"
     command: /start

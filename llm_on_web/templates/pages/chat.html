@@ -6,19 +6,19 @@
   Chat
 {% endblock title %}
 {% block bodyclass %}
-  bg-gemma bg-cover bg-no-repeat min-h-screen overflow-hidden
+  bg-gemma bg-cover bg-no-repeat min-h-screen overflow-hidden 
 {% endblock bodyclass %}
 {% block javascript %}
   {{ block.super }}
   <script src="{% static 'js/chat-handle.js' %}"></script>
 {% endblock javascript %}
 {% block content %}
-  <div class="h-custom-vh w-full mt-20 px-3 overflow-y-clip appearance-none ">
+  <div class="h-custom-vh w-full py-10  max-sm:py-12  px-3  overflow-y-clip appearance-none ">
     <div class="flex flex-col rounded-3xl bg-gray-800 bg-opacity-40 py-2 px-4 md:px-24 lg:px-48 drop-shadow-2xl backdrop-blur-2xl mt-10 h-full">
-      <h1 class=" absolute top-5 left-10 font-sans1  text-black text-3xl text-semibold md:text-4xl hover:text-white bg-cyan-400 rounded-full px-4 py-1">
+      <h1 class=" absolute top-30 left-10 font-sans1  text-black text-3xl text-semibold md:text-4xl hover:text-white bg-cyan-400 rounded-full px-4 py-1">
         Chat
       </h1>
-      <a href="{% url 'chat:chat' %}" class=" absolute top-6 right-10">
+      <a href="{% url 'chat:chat' %}" class=" absolute top-30 right-10">
         <svg width="40px"
              height="45px"
              viewBox="0 0 24 24"
@@ -30,7 +30,7 @@
         </svg>
       </a>
       <div id="chat-container"
-           class="flex mt-10 flex-col h-screen overflow-y-auto">
+           class="flex mt-10 py-2 flex-col h-screen overflow-y-auto">
         <div id="chat-response"
              class="mt-4 flex-1 overflow-y-auto px-4 py-6 sm:px-16"></div>
       </div>
@@ -64,7 +64,7 @@
                  placeholder="Ask something..."
                  id="user-query-text"
                  name="query"
-                 type="text" />
+                 type="text" required />
           <input class="hidden"
                  name="who"
                  id="who"

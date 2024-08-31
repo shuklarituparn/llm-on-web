@@ -39,12 +39,11 @@
       <!-- RoughEase, ExpoScaleEase and SlowMo are all included in the EasePack file -->
       <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/EasePack.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/CustomEase.min.js"></script>
-      <script defer src="{% static 'js/project.js' %}"></script>
     {% endblock javascript %}
   </head>
   <body class="{% block bodyclass %}{% endblock bodyclass %}  ">
     {% block body %}
-      <nav class=" z-50 bg-gray-900 backdrop-blur-sm bg-opacity-70 top-1 rounded-full  sm:rounded-b-[2.5rem] fixed w-full rounded-xl font-sans1 ">
+      <nav class=" z-50 bg-gray-900 backdrop-blur-sm bg-opacity-70 top-1 rounded-b-[2.5rem] fixed w-full  font-sans1 ">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <a href="{% url 'home' %}"
              class="flex items-center space-x-3 rtl:space-x-reverse">
@@ -113,6 +112,14 @@
                     <a id="log-in-link"
                        href="{% url 'account_login' %}"
                        class="block px-4 py-2 text-center text-sm text-gray-700 hover:bg-gray-600 dark:text-gray-200 text-white">{% translate "Sign In" %}</a>
+                  </li>
+		   <li class="md:hidden">
+                    <a href="{% url 'chat:chat' %}"
+                       class="block px-4 py-2 text-sm text-center text-gray-700  hover:bg-gray-600 dark:text-gray-200 text-white">Chat</a>
+                  </li>
+                  <li class="md:hidden">
+                    <a href="{% url 'about' %}"
+                       class="block px-4 py-2 text-sm text-center text-gray-700  hover:bg-gray-600 dark:text-gray-200 text-white">About</a>
                   </li>
                 {% endif %}
               </ul>

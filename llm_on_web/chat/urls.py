@@ -1,12 +1,15 @@
 from django.urls import path
 from django.views.generic import TemplateView
 
+from .views import llava_chat_view
+from .views import user_chat_view
+
 app_name = "chat"
 urlpatterns = [
-    path("", TemplateView.as_view(template_name="pages/chat.html"), name="chat"),
+    path("", view=user_chat_view, name="chat"),
     path(
         "llava/",
-        TemplateView.as_view(template_name="pages/chat_llava.html"),
+        view=llava_chat_view,
         name="llava",
     ),
     path(
@@ -15,3 +18,4 @@ urlpatterns = [
         name="llava_conversation",
     ),
 ]
+

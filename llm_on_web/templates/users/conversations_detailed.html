@@ -21,12 +21,21 @@
       <div id="chat-container" class="flex flex-col h-screen overflow-y-auto">
         <div id="chat-response" class="flex-1 overflow-y-auto px-4 py-6 sm:px-16">
           {% if request.user.is_authenticated %}
-            {% for chat in chats %}
-              <div class="flex justify-center items-center">
-                <a href="{% url 'users:conversation_detail' conversationid=chat.chatid %}"
-                   class="flex bg-opacity-30 mt-14 bg-gray-800 text-white mb-2 font-sans1 rounded-xl break-words py-2 px-4 max-w-sm outline outline-offset-2 outline-blue-500">
-                  {{ chat.chatid }}
-                </a>
+            {% for conversation in user_conversations %}
+              <div class="flex justify-end">
+                <div class="flex bg-opacity-30 mt-14 bg-gray-800 text-white mb-2 font-sans1 rounded-xl break-words py-2 px-4 max-w-sm outline outline-offset-2 outline-blue-500">
+                  {{ conversation.user_query }}
+                  {% if conversation.imagequery %}
+                    <img class="size-40 mt-4"
+                         src="{% get_media_prefix %}{{ conversation.imagequery }}"
+                         alt="userqueryimage" />
+                  {% endif %}
+                </div>
+              </div>
+              <div class="flex justify-start">
+                <div class="bg-opacity-30 mt-4 mb-2 bg-gray-800 text-white font-sans1 break-words rounded-lg py-2 px-4 max-w-sm outline outline-offset-2 outline-cyan-500">
+                  {{ conversation.llm_response }}
+                </div>
               </div>
             {% endfor %}
           {% else %}

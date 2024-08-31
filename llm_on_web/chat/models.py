@@ -9,10 +9,9 @@ class Chatid(models.Model):
     chatid = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    chat_title = models.CharField(default="", blank=True)
+    chat_title = models.CharField(max_length=255, default="", blank=True)
     userid = models.ForeignKey(User, on_delete=models.RESTRICT, null=True)
 
-    # TODO: In implementation reference the uuid using the hex field
     def __str__(self):
         return f"Chats: {self.userid}"
 
@@ -25,7 +24,7 @@ class Conversations(models.Model):
         related_name="conversations",
     )
     userid = models.ForeignKey(User, on_delete=models.RESTRICT)
-    llm_response = models.TextField(default="", blank=True)
+    llm_response = models.TextField(max_length=1000, default="", blank=True)
     user_query = models.TextField(default="")
     imagequery = models.ImageField(
         upload_to="user-images-query/",
